@@ -8,10 +8,10 @@ Just copy the library and use it for your cache.I'll be hosting this as mvn repo
 Only thing needed is git and maven as of now.
 
 ### To clone the repo in your system.
-git clone REPO
+`git clone` REPO
 
 ### To build the repo
-mvn clean install
+`mvn clean install`
 
 ## Running the tests
 Tests needs to written for this. But since i am new to testing. I would really appreciate if someone could complete the tests for the same.
