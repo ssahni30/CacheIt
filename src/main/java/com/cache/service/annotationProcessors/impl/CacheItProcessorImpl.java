@@ -26,7 +26,8 @@ public class CacheItProcessorImpl implements CacheItProcessor{
         Set<String> mapsToBeLoadedOnStartup = new HashSet<>();
         String mapName;
         for(Class<?> clazz : annotatedClasses){
-            mapName = getName(clazz);
+            String[] packageName = getName(clazz).split("\\.");
+            mapName = packageName[packageName.length-1];
             keys.add(getName(clazz));
             mapNameToFieldKeys.put(mapName,getMapKeys(clazz));
             if(clazz.getAnnotation(CacheIt.class).loadOnStartup()){

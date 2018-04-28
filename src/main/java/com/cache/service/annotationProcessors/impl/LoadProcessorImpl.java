@@ -104,7 +104,8 @@ public class LoadProcessorImpl implements LoadProcessor {
             ParameterizedType pType = (ParameterizedType)type;
             Type[] arr = pType.getActualTypeArguments();
             Class<?> clazz = (Class<?>)arr[0];
-            methodReturnClass = clazz.getName();
+            String[] packageNameArray = pType.getActualTypeArguments()[0].getTypeName().split("\\.");
+            methodReturnClass = packageNameArray[packageNameArray.length-1];
         }
         return  methodReturnClass;
     }

@@ -30,6 +30,26 @@ public class CacheMapApiImpl implements CacheMapApi {
     }
 
     @Override
+    public <T> Object getValueByNameAndKey(String name,T key) throws Exception {
+        MapData mapData = CacheMap.getMapData(name);
+        if(!mapData.isKeyFieldCacheDataTypesUnique()){
+            throw new Exception("");
+        }
+        List<KeyFieldCache> cacheList = mapData.getKeyFieldCaches();
+        KeyFieldCache keyField = null;
+        for(KeyFieldCache keyFieldCache : cacheList){
+            if(keyFieldCache.getDataType().equals(key.getClass().getTypeName())){
+                keyField = keyFieldCache;
+                break;
+            }
+        }
+        if(keyField == null){
+            throw new Exception();
+        }
+        return keyField.getCacheMap().get(key);
+    }
+
+    @Override
     public Object getValueByNameAndKeyName(String name, String keyName, Object key) throws Exception {
         KeyFieldCache keyField = null;
         for(KeyFieldCache keyFieldCache :  CacheMap.getMapData(name).getKeyFieldCaches()){
