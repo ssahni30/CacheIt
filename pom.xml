@@ -16,6 +16,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <showWarnings>true</showWarnings>
+                    <!--<compilerArgument>-proc:none</compilerArgument>-->
                     <!--<compilerArgs>-->
                         <!--<arg>-Adebug=true</arg>-->
                     <!--</compilerArgs>-->
@@ -34,6 +35,16 @@
             <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.12.1.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>1.0-rc1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
