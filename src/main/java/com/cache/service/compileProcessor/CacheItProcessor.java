@@ -27,7 +27,6 @@ public class CacheItProcessor extends AbstractProcessor {
         Messager messager = processingEnv.getMessager();
         String packageName = null;
         String name = null;
-
         CompileProcessor processor = new CompileProcessorImpl();
         processor.getMapNames(types,messager,true);
         return true;

@@ -1,6 +1,6 @@
 package com.cache.service.cacheMapApi;
 
-import java.util.Map;
+import java.lang.reflect.InvocationTargetException;
 
 public interface CacheMapApi {
 
@@ -9,4 +9,6 @@ public interface CacheMapApi {
     <T> Object getValueByNameAndKey(String name, T key) throws Exception;
 
     Object getValueByNameAndKeyName(String name, String keyName, Object key) throws Exception;
+
+    void loadMapByName(String name) throws IllegalAccessException, InstantiationException, InvocationTargetException;
 }

@@ -38,8 +38,7 @@ public class LoadProcessor extends AbstractProcessor {
             if (name.isEmpty()){
                 ExecutableElement methodElement = (ExecutableElement) annotatedElement;
                 String[] returnArray = methodElement.getReturnType().toString().split("\\.");
-                String className = returnArray[returnArray.length - 1].replace(">","");
-                name = className;
+                name = returnArray[returnArray.length - 1].replace(">","");
             }
             if(mapNameSet.contains(name)){
                 messager.printMessage(Diagnostic.Kind.ERROR,"Multiple Methods for same map name exist "+ name);
@@ -50,7 +49,12 @@ public class LoadProcessor extends AbstractProcessor {
 
         CompileProcessor processor = new CompileProcessorImpl();
         Collection<? extends Element> annotatedClasses = roundEnv.getElementsAnnotatedWith(CacheIt.class);
-        processor.getMapNames(ElementFilter.typesIn(annotatedClasses),messager,false);
+        Set<String> mapNames = processor.getMapNames(ElementFilter.typesIn(annotatedClasses),messager,false);
+        for(String mapName : mapNames){
+            if(!mapNameSet.contains(mapName)){
+                messager.printMessage(Diagnostic.Kind.ERROR,"No method found for this class: " +  mapName);
+            }
+        }
         return true;
     }
 }

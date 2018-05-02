@@ -21,10 +21,6 @@ public class CacheMap {
         }
     }
 
-//    public static CacheMap getCacheMap() {
-//        return cacheMap;
-//    }
-
     private Map<String,MapData> mapNameToKeyFieldCache;
 
     private CacheMap(Map<String,MapData> mapNameToKeyFieldCache) {
@@ -35,12 +31,22 @@ public class CacheMap {
         return cacheMap.mapNameToKeyFieldCache.get(name);
     }
 
-    public void loadMapByName(String mapName) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        if(mapNameToKeyFieldCache == null){
+    public static void loadMapByName(String mapName) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        if(cacheMap.mapNameToKeyFieldCache == null){
             throw new IllegalStateException();
         } else {
             LoadProcessor load = new LoadProcessorImpl();
-            load.loadData(mapName, this.mapNameToKeyFieldCache);
+            load.loadData(mapName, cacheMap.mapNameToKeyFieldCache);
+        }
+    }
+
+    public static void loadAllMaps() throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        if(cacheMap.mapNameToKeyFieldCache == null) {
+            throw new IllegalStateException();
+        } else {
+            for(String mapName : cacheMap.mapNameToKeyFieldCache.keySet()){
+                loadMapByName(mapName);
+            }
         }
     }
 

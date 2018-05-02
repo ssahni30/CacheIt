@@ -3,8 +3,11 @@ package com.cache.service.cacheMapApi.impl;
 import com.cache.core.KeyFieldCache;
 import com.cache.core.MapData;
 import com.cache.service.CacheMap;
+import com.cache.service.annotationProcessors.LoadProcessor;
+import com.cache.service.annotationProcessors.impl.LoadProcessorImpl;
 import com.cache.service.cacheMapApi.CacheMapApi;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class CacheMapApiImpl implements CacheMapApi {
@@ -13,7 +16,7 @@ public class CacheMapApiImpl implements CacheMapApi {
     public Object getValueByNameAndKeyDataType(String name, Class<?> dataType, Object key) throws Exception {
         MapData mapData = CacheMap.getMapData(name);
         if(!mapData.isKeyFieldCacheDataTypesUnique()){
-            throw new Exception("");
+            throw new Exception("Multiple Data Types of same class");
         }
         List<KeyFieldCache> cacheList = mapData.getKeyFieldCaches();
         KeyFieldCache keyField = null;
@@ -33,7 +36,7 @@ public class CacheMapApiImpl implements CacheMapApi {
     public <T> Object getValueByNameAndKey(String name,T key) throws Exception {
         MapData mapData = CacheMap.getMapData(name);
         if(!mapData.isKeyFieldCacheDataTypesUnique()){
-            throw new Exception("");
+            throw new Exception("Multiple Data Types of same class");
         }
         List<KeyFieldCache> cacheList = mapData.getKeyFieldCaches();
         KeyFieldCache keyField = null;
@@ -58,8 +61,15 @@ public class CacheMapApiImpl implements CacheMapApi {
             }
         }
         if(keyField == null){
-            throw new Exception();
+            throw new Exception("No key with given name");
         }
         return keyField.getCacheMap().get(key);
     }
+
+    @Override
+    public void loadMapByName(String mapName) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        CacheMap.loadMapByName(mapName);
+    }
+
+
 }
