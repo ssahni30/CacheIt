@@ -40,6 +40,7 @@ public class LoadProcessorImpl implements LoadProcessor {
             return;
         }
         loadMapValues(objectCollection,mapNameToKeyFieldCache);
+        mapNameToKeyFieldCache.get(mapName).setUpdated(new Date());
     }
 
     private  void loadMapValues(Collection<Object> objects, Map<String, MapData> mapNameToKeyFieldCache) throws IllegalAccessException {

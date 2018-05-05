@@ -11,4 +11,8 @@ public interface CacheMapApi {
     Object getValueByNameAndKeyName(String name, String keyName, Object key) throws Exception;
 
     void loadMapByName(String name) throws IllegalAccessException, InstantiationException, InvocationTargetException;
+
+    void loadAllMaps() throws IllegalAccessException, InstantiationException, InvocationTargetException;
+
+    void asyncMapLoad();
 }

@@ -14,7 +14,6 @@ import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @SupportedAnnotationTypes("com.cache.core.annotations.Key")
@@ -43,6 +42,8 @@ public class KeyProcessor extends AbstractProcessor {
         Collection<? extends Element> annotatedClasses = roundEnv.getElementsAnnotatedWith(CacheIt.class);
         Set<String> mapNameSet = processor.getMapNames(ElementFilter.typesIn(annotatedClasses),messager,false);
 
+//        messager.printMessage(Diagnostic.Kind.ERROR,"key waali classes" +  mapNames.toString());
+//        messager.printMessage(Diagnostic.Kind.ERROR,"cacheit classes " +  mapNameSet.toString());
         for(String mapName : mapNameSet){
             if(!mapNames.contains(mapName)){
                 messager.printMessage(Diagnostic.Kind.ERROR,"No key found for this class: " +  mapName);

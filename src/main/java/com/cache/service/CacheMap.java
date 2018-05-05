@@ -8,6 +8,7 @@ import com.cache.service.annotationProcessors.impl.LoadProcessorImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.Set;
 
 
 public class CacheMap {
@@ -48,6 +49,10 @@ public class CacheMap {
                 loadMapByName(mapName);
             }
         }
+    }
+
+    public static Set<String> getAllMapNames(){
+        return cacheMap.mapNameToKeyFieldCache.keySet();
     }
 
 }

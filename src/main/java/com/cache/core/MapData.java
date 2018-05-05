@@ -1,6 +1,7 @@
 package com.cache.core;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,8 @@ public class MapData {
     private List<KeyFieldCache> keyFieldCaches;
 
     private boolean keyFieldCacheDataTypesUnique;
+
+    private Date updated;
 
     public MapData(Class<?> parentClass, Method method, List<KeyFieldCache> keyFieldCacheSet,boolean keyFieldCacheDataTypesUnique) {
         this.parentClass = parentClass;
@@ -55,4 +58,11 @@ public class MapData {
         this.keyFieldCacheDataTypesUnique = keyFieldCacheDataTypesUnique;
     }
 
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 }

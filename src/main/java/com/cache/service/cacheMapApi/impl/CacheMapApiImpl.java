@@ -3,12 +3,12 @@ package com.cache.service.cacheMapApi.impl;
 import com.cache.core.KeyFieldCache;
 import com.cache.core.MapData;
 import com.cache.service.CacheMap;
-import com.cache.service.annotationProcessors.LoadProcessor;
-import com.cache.service.annotationProcessors.impl.LoadProcessorImpl;
 import com.cache.service.cacheMapApi.CacheMapApi;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CacheMapApiImpl implements CacheMapApi {
 
@@ -69,6 +69,41 @@ public class CacheMapApiImpl implements CacheMapApi {
     @Override
     public void loadMapByName(String mapName) throws IllegalAccessException, InstantiationException, InvocationTargetException {
         CacheMap.loadMapByName(mapName);
+    }
+
+    @Override
+    public void loadAllMaps() throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        CacheMap.loadAllMaps();
+    }
+
+    @Override
+    public void asyncMapLoad(){
+        ExecutorService executorService1 = Executors.newFixedThreadPool(5);
+        for(String mapName : CacheMap.getAllMapNames()){
+            executorService1.execute(new AsyncMapLoad(mapName));
+        }
+
+    }
+
+    private class AsyncMapLoad implements Runnable {
+        private String mapName;
+
+        public AsyncMapLoad(String mapName) {
+            this.mapName = mapName;
+        }
+
+        @Override
+        public void run() {
+            try {
+                CacheMap.loadMapByName(mapName);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

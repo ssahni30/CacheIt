@@ -17,6 +17,11 @@
                     <target>1.8</target>
                     <showWarnings>true</showWarnings>
                     <!--<compilerArgument>-proc:none</compilerArgument>-->
+                    <!--<includes>-->
+                        <!--<include>com/cache/service/compileProcessor/CacheIt.java</include>-->
+                        <!--<include>com/cache/service/compileProcessor/Key.java</include>-->
+                        <!--<include>com/cache/service/compileProcessor/Load.java</include>-->
+                    <!--</includes>-->
                     <!--<compilerArgs>-->
                         <!--<arg>-Adebug=true</arg>-->
                     <!--</compilerArgs>-->
