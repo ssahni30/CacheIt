@@ -26,6 +26,26 @@
                         <!--<arg>-Adebug=true</arg>-->
                     <!--</compilerArgs>-->
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <compilerArgument>-proc:none</compilerArgument>
+                            <includes>
+                                <include>com/cache/service/compileProcessor/CacheIt.java</include>
+                                <include>com/cache/service/compileProcessor/Key.java</include>
+                                <include>com/cache/service/compileProcessor/Load.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>compile-project</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

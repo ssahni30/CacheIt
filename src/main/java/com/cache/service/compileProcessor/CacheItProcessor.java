@@ -1,4 +1,4 @@
-package com.cache.service.processing;
+package com.cache.service.compileProcessor;
 
 import com.cache.core.annotations.CacheIt;
 import com.cache.service.compileProcessor.processor.CompileProcessor;

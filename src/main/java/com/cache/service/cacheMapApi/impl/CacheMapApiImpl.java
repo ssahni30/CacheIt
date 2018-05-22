@@ -41,13 +41,13 @@ public class CacheMapApiImpl implements CacheMapApi {
         List<KeyFieldCache> cacheList = mapData.getKeyFieldCaches();
         KeyFieldCache keyField = null;
         for(KeyFieldCache keyFieldCache : cacheList){
-            if(keyFieldCache.getDataType().equals(key.getClass().getTypeName())){
+            if(keyFieldCache.getDataType().getName().equals(key.getClass().getTypeName())){
                 keyField = keyFieldCache;
                 break;
             }
         }
         if(keyField == null){
-            throw new Exception();
+            throw new Exception("No data type found for " +  key.getClass().getTypeName());
         }
         return keyField.getCacheMap().get(key);
     }

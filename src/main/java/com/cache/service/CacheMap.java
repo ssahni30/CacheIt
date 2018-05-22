@@ -28,7 +28,11 @@ public class CacheMap {
         this.mapNameToKeyFieldCache = mapNameToKeyFieldCache;
     }
 
-    public static MapData getMapData(String name){
+    public static MapData getMapData(String name) throws Exception {
+        MapData mapData = cacheMap.mapNameToKeyFieldCache.get(name);
+        if(mapData ==null ){
+            throw new Exception("No Map with given name found");
+        }
         return cacheMap.mapNameToKeyFieldCache.get(name);
     }
 
