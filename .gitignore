@@ -1,5 +1,9 @@
 .idea/
+.DS_Store
 cache.iml
 sonar-project.properties
 target/
-
+javadocs/
+*.asc
+*.jar
+*.pom
