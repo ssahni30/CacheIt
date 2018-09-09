@@ -7,3 +7,7 @@ javadocs/
 *.asc
 *.jar
 *.pom
+*.iml
+pom.xml.releaseBackup
+release.properties
+
