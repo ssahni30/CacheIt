@@ -17,15 +17,13 @@ public class KeyFieldCache<K,V> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        KeyFieldCache keyFieldCache = (KeyFieldCache) o;
-        return Objects.equals(dataType, keyFieldCache.dataType) &&
-                Objects.equals(name, keyFieldCache.name);
+        KeyFieldCache<?, ?> that = (KeyFieldCache<?, ?>) o;
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(dataType, name);
+        return Objects.hash(name);
     }
 
     public Map<K, V> getCacheMap() {

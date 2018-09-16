@@ -24,7 +24,7 @@ public class LoadProcessorImpl implements LoadProcessor {
         try {
             objects = method.invoke(method.getDeclaringClass().newInstance());
         } catch (IllegalAccessException e) {
-            //TODO: Check this exception while compiling
+            //This has been handled in compile time
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
@@ -81,10 +81,10 @@ public class LoadProcessorImpl implements LoadProcessor {
     @Override
     public Map<String, Method> getAllMethodsWithLoadAnnotation(){
         Map<String,Method> mapNameToMethod = new HashMap<>();
-        Package[] pa = Package.getPackages();
-        for (int i = 0; i < pa.length; i++) {
-            Package p = pa[i];
-            Set<Method> methods = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forPackage(p.getName())).setScanners(new MethodAnnotationsScanner())).getMethodsAnnotatedWith(Load.class);
+        Package[] packages = Package.getPackages();
+        for (int i = 0; i < packages.length; i++) {
+            Package packageObject = packages[i];
+            Set<Method> methods = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forPackage(packageObject.getName())).setScanners(new MethodAnnotationsScanner())).getMethodsAnnotatedWith(Load.class);
             for(Method method : methods){
                 if(mapNameToMethod.get(getName(method)) == null){
                     mapNameToMethod.put(getName(method),method);

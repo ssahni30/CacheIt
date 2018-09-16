@@ -13,6 +13,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 
 import javax.lang.model.util.ElementFilter;
+import javax.lang.model.element.Modifier;
 import javax.tools.Diagnostic;
 import java.util.Collection;
 import java.util.HashSet;
@@ -36,6 +37,9 @@ public class LoadProcessor extends AbstractProcessor {
                 ExecutableElement methodElement = (ExecutableElement) annotatedElement;
                 String[] returnArray = methodElement.getReturnType().toString().split("\\.");
                 name = returnArray[returnArray.length - 1].replace(">","");
+            }
+            if(!annotatedElement.getModifiers().contains(Modifier.PUBLIC)) {
+                messager.printMessage(Diagnostic.Kind.ERROR, "Method is not public: " + name);
             }
             if(mapNameSet.contains(name)){
                 messager.printMessage(Diagnostic.Kind.ERROR,"Multiple Methods for same map name exist "+ name);
