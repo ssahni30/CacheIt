@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class KeyFieldCache {
+public class KeyFieldCache<K,V> {
 
     private Class<?> dataType;
 
     private String name;
 
-    private Map<Object,Object> cacheMap = new ConcurrentHashMap<>();
+    private Map<K, V> cacheMap;
 
     @Override
     public boolean equals(Object o) {
@@ -28,19 +28,18 @@ public class KeyFieldCache {
         return Objects.hash(dataType, name);
     }
 
-    public Map<Object, Object> getCacheMap() {
-
+    public Map<K, V> getCacheMap() {
         return cacheMap;
     }
 
-    public void setCacheMap(Map<Object, Object> cacheMap) {
+    public void setCacheMap(Map<K, V> cacheMap) {
         this.cacheMap = cacheMap;
     }
 
     public KeyFieldCache(Class<?> dataType, String name) {
         this.dataType = dataType;
         this.name = name;
-        this.cacheMap = new HashMap<>();
+        this.cacheMap = new ConcurrentHashMap<>();
     }
 
     public Class<?> getDataType() {

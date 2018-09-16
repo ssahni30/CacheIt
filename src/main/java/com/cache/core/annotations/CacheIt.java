@@ -11,7 +11,7 @@ public @interface CacheIt {
 
     String mapName() default "";
 
-    boolean loadOnStartup() default false;
+    boolean loadOnStartup() default true;
 
     String cron() default "";
 }

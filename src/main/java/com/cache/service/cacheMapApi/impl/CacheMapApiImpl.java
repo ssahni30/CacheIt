@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class CacheMapApiImpl implements CacheMapApi {
+public class CacheMapApiImpl<T> implements CacheMapApi {
 
     @Override
-    public Object getValueByNameAndKeyDataType(String name, Class<?> dataType, Object key) throws Exception {
+    public <T> T getValueByNameAndKeyDataType(String name, Class<?> dataType, Object key) throws Exception {
         MapData mapData = CacheMap.getMapData(name);
         if(!mapData.isKeyFieldCacheDataTypesUnique()){
             throw new Exception("Multiple Data Types of same class");
@@ -29,11 +29,11 @@ public class CacheMapApiImpl implements CacheMapApi {
         if(keyField == null){
             throw new Exception();
         }
-        return keyField.getCacheMap().get(key);
+        return (T) keyField.getCacheMap().get(key);
     }
 
     @Override
-    public <T> Object getValueByNameAndKey(String name,T key) throws Exception {
+    public <T> T getValueByNameAndKey(String name, Object key) throws Exception {
         MapData mapData = CacheMap.getMapData(name);
         if(!mapData.isKeyFieldCacheDataTypesUnique()){
             throw new Exception("Multiple Data Types of same class");
@@ -49,11 +49,11 @@ public class CacheMapApiImpl implements CacheMapApi {
         if(keyField == null){
             throw new Exception("No data type found for " +  key.getClass().getTypeName());
         }
-        return keyField.getCacheMap().get(key);
+        return (T) keyField.getCacheMap().get(key);
     }
 
     @Override
-    public Object getValueByNameAndKeyName(String name, String keyName, Object key) throws Exception {
+    public <T> T getValueByNameAndKeyName(String name, String keyName, Object key) throws Exception {
         KeyFieldCache keyField = null;
         for(KeyFieldCache keyFieldCache :  CacheMap.getMapData(name).getKeyFieldCaches()){
             if(keyFieldCache.getName().equals(keyName)){
@@ -63,7 +63,7 @@ public class CacheMapApiImpl implements CacheMapApi {
         if(keyField == null){
             throw new Exception("No key with given name");
         }
-        return keyField.getCacheMap().get(key);
+        return (T) keyField.getCacheMap().get(key);
     }
 
     @Override
