@@ -7,14 +7,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.google.common.base.Predicates.instanceOf;
-
 public class CacheTest {
 
     private CacheMapApi cacheMapApi;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp(){
         CacheMap.initiate();
         this.cacheMapApi = new CacheMapApiImpl();
     }
